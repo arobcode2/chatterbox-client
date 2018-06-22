@@ -5,6 +5,7 @@
 class App {
 
   constructor() {
+    this.server = 'http://parse.atx.hackreactor.com/chatterbox/classes/messages';
   }
 
   init() {
@@ -27,6 +28,22 @@ class App {
     }
     });
   }
+
+  fetch() {
+    $.ajax({
+    url: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
+    type: 'GET',
+    
+    success: function (data) {
+      //App.server = this.url;
+      console.log(data);
+    },
+    error: function (data) {
+      console.error('chatterbox: Failed to get message', data);
+    }
+    
+    });
+  }
 };
 
 const app = new App();
@@ -39,6 +56,7 @@ var message = {
 
 $(document).ready(function() {
   app.send(message);
+  app.fetch();
 });
 
 
