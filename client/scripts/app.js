@@ -2,9 +2,17 @@
 //http://parse.atx.hackreactor.com/chatterbox/classes/messages
 
 //let myData = [];
-let app = {};
+class App {
 
+  constructor() {
+  }
 
+  init() {
+  
+  }
+};
+
+const app = new App();
 
 
 
