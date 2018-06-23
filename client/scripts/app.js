@@ -7,13 +7,15 @@ class App {
   constructor() {
     this.server = 'http://parse.atx.hackreactor.com/chatterbox/classes/messages';
     //this.data = [];
+    App.pointer = this;
   }
 
   init() {
-    let pointer = this;
+    console.log('made it in the init');
     $(document).ready(function() {
-      $('.username').click(pointer.handleUsernameClick());
-      $('.submit').click(pointer.handleSubmit());
+      $('.username').click(App.pointer.handleUsernameClick);
+      $('.submit').click(App.pointer.handleSubmit);
+      $('.refresh').on('click', App.pointer.fetch);
     });
   }
 
@@ -35,7 +37,6 @@ class App {
   }
 
   fetch() {
-    let pointer = this;
     $.ajax({
       url: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
       type: 'GET',
@@ -43,7 +44,7 @@ class App {
       success: function (data) {
         //pointer.data = data.results;
         for (var i = 0; i < data.results.length; i++) {
-          pointer.renderMessage(data.results[i]);
+          App.pointer.renderMessage(data.results[i]);
         }
         console.log(data);
       },
@@ -80,6 +81,7 @@ class App {
 };
 
 const app = new App();
+app.init();
 
 var message = {
   username: 'titan',
@@ -90,7 +92,7 @@ var message = {
 $(document).ready(function() {
   console.log(app.data);
   app.send(message);
-  app.fetch();
+  //app.fetch();
   //app.renderMessage(message);
   //app.clearMessages();
 });
