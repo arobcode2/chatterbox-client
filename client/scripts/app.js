@@ -44,6 +44,22 @@ class App {
     
     });
   }
+
+  clearMessages() {
+    $('#chats').empty();
+  }
+
+  renderMessage(message) {
+    $(document).ready(function() {
+      $('#chats').append(`<div> ${message} <div/>`);
+    });
+  }
+
+  renderRoom(roomname) {
+    $(document).ready(function() {
+      $('#roomSelect').append(`<div> ${roomname} <div/>`);
+    });
+  }
 };
 
 const app = new App();
@@ -57,6 +73,8 @@ var message = {
 $(document).ready(function() {
   app.send(message);
   app.fetch();
+  app.clearMessages();
+  app.renderMessage(message);
 });
 
 
