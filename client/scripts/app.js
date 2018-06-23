@@ -9,7 +9,10 @@ class App {
   }
 
   init() {
-  
+    $(document).ready(function() {
+      $('.username').click(this.handleUsernameClick());
+      $('.submit').click(this.handleSubmit());
+    });
   }
 
   send(message) {
@@ -50,16 +53,20 @@ class App {
   }
 
   renderMessage(message) {
-    $(document).ready(function() {
-      $('#chats').append(`<div> ${message} <div/>`);
-    });
+    $('#chats').append(`<div> ${message} <div/>`);
   }
 
   renderRoom(roomname) {
-    $(document).ready(function() {
-      $('#roomSelect').append(`<div> ${roomname} <div/>`);
-    });
+    $('#roomSelect').append(`<div> ${roomname} <div/>`);
   }
+
+  handleUsernameClick(username) {
+    $('#main').append(`<div> ${username} <div/>`);
+  }
+
+  handleSubmit() {
+    this.send(message);
+  } 
 };
 
 const app = new App();
@@ -70,12 +77,12 @@ var message = {
   roomname: '4chan'
 };
 
-$(document).ready(function() {
-  app.send(message);
-  app.fetch();
-  app.clearMessages();
-  app.renderMessage(message);
-});
+// $(document).ready(function() {
+//   app.send(message);
+//   app.fetch();
+//   app.clearMessages();
+//   app.renderMessage(message);
+// });
 
 
 

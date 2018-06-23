@@ -1,10 +1,12 @@
 describe('chatterbox', function() {
   it('should parse correctly and have an object named `app`', function() {
+    app.init();
     expect(app).to.be.an('object');
   });
 
   describe('init', function() {
     it('should have a method called init', function() {
+    app.init();
       expect(app.init).to.be.ok;
     });
 
