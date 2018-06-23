@@ -9,9 +9,10 @@ class App {
   }
 
   init() {
+    let pointer = this;
     $(document).ready(function() {
-      $('.username').click(this.handleUsernameClick());
-      $('.submit').click(this.handleSubmit());
+      $('.username').click(pointer.handleUsernameClick());
+      $('.submit').click(pointer.handleSubmit());
     });
   }
 
@@ -34,17 +35,16 @@ class App {
 
   fetch() {
     $.ajax({
-    url: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
-    type: 'GET',
+      url: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
+      type: 'GET',
     
-    success: function (data) {
-      //App.server = this.url;
-      console.log(data);
-    },
-    error: function (data) {
-      console.error('chatterbox: Failed to get message', data);
-    }
-    
+      success: function (data) {
+        //App.server = this.url;
+        console.log(data);
+      },
+      error: function (data) {
+        console.error('chatterbox: Failed to get message', data);
+      }
     });
   }
 

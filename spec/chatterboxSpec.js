@@ -1,12 +1,13 @@
 describe('chatterbox', function() {
   it('should parse correctly and have an object named `app`', function() {
-    app.init();
+    //app.init();
     expect(app).to.be.an('object');
+    
   });
 
   describe('init', function() {
     it('should have a method called init', function() {
-    app.init();
+      //app.init();
       expect(app.init).to.be.ok;
     });
 
@@ -17,11 +18,11 @@ describe('chatterbox', function() {
 
     before(function() {
       ajaxSpy = sinon.stub($, 'ajax');
-      app.init();
     });
 
     beforeEach(function() {
       ajaxSpy.reset();
+      //app.init();
     });
 
     describe('sending', function() {
