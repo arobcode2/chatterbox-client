@@ -18,6 +18,12 @@ class App {
   }
 
   send(message) {
+    console.log(message);
+    // let tempMessage = {
+    //   username: 'titan',
+    //   text: message,
+    //   roomname: 'lobby'
+    // };
     $.ajax({
     // This is the url you should use to communicate with the parse API server.
     url: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
@@ -80,12 +86,20 @@ class App {
   }
 
   handleSubmit() {
+    let message = {};
+    message['text'] = $('input').val();
+    message['username'] = 'titan';
+    message['roomname'] = 'lobby';
     App.pointer.send(message);
   }
 
   clearRooms() {
     $('.roomsDrop').empty();
   } 
+
+  // buildMessage() {
+  //   App.pointer.send(message);
+  // }
 };
 
 const app = new App();
