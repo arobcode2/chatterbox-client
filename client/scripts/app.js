@@ -1,17 +1,15 @@
 // YOUR CODE HERE:
 //http://parse.atx.hackreactor.com/chatterbox/classes/messages
 
-//let myData = [];
 class App {
 
   constructor() {
     this.server = 'http://parse.atx.hackreactor.com/chatterbox/classes/messages';
-    //this.data = [];
     App.pointer = this;
+    App.rooms = {};
   }
 
   init() {
-    console.log('made it in the init');
     $(document).ready(function() {
       $('.username').click(App.pointer.handleUsernameClick);
       $('.submit').click(App.pointer.handleSubmit);
@@ -42,11 +40,14 @@ class App {
       type: 'GET',
     
       success: function (data) {
-        //pointer.data = data.results;
+        App.pointer.clearMessages();
         for (var i = 0; i < data.results.length; i++) {
           App.pointer.renderMessage(data.results[i]);
+          App.rooms[data.results[i].roomname] = data.results[i].roomname;
         }
+        App.pointer.renderRoom();
         console.log(data);
+
       },
       error: function (data) {
         console.error('chatterbox: Failed to get message', data);
@@ -64,7 +65,9 @@ class App {
   }
 
   renderRoom(roomname) {
-    $('#roomSelect').append(`<div> ${roomname} <div/>`);
+    for (let key in App.rooms) {
+      $('.roomsDrop').append(`<option> ${key} </option>`);
+    }
   }
 
   handleUsernameClick(username) {
@@ -90,36 +93,10 @@ var message = {
 };
 
 $(document).ready(function() {
-  console.log(app.data);
-  app.send(message);
+  //console.log(app.data);
+  //app.send(message);
+  //console.log(App.rooms);
   //app.fetch();
   //app.renderMessage(message);
   //app.clearMessages();
 });
-
-
-
-
-
-
-
-
-
-// $(document).ready(function(){
-//   $.ajax({
-//     url: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
-//     type: 'GET',
-//     contentType: 'application/json',
-//     success: function (data) {
-//       myData = data.results;
-//       //$("#chats").append("<div></div>").text(data.results[0].objectId);
-//       //console.log(data.results);
-//     },
-//     error: function (data) {
-//       // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
-//       console.error('chatterbox: Failed to get message', data);
-//     }
-//   });
-//   //console.log('mydata ' + myData);
-// });
-// 
