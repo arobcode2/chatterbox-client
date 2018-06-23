@@ -38,7 +38,7 @@ class App {
     $.ajax({
       url: 'http://parse.atx.hackreactor.com/chatterbox/classes/messages',
       type: 'GET',
-    
+      data: {order: '-createdAt'},
       success: function (data) {
         App.pointer.clearMessages();
         App.pointer.clearRooms();
@@ -62,12 +62,16 @@ class App {
 
   renderMessage(message) {
     //.css("font-weight", "Bold")
-    $('#chats').append(`<div> <div>${message.username}:<div/> <div>${message.text}<div/> <div/> <br>`);
+    let filterUsername = _.escape(message.username);
+    let filterText = _.escape(message.text);
+    $('#chats').append(`<div> <div>${filterUsername}:<div/> <div>${filterText}<div/> <div/> <br>`);
   }
 
   renderRoom(roomname) {
+    let filterRoomname;
     for (let key in App.rooms) {
-      $('.roomsDrop').append(`<option> ${key} </option>`);
+       filterRoomname = _.escape(key);
+      $('.roomsDrop').append(`<option> ${filterRoomname} </option>`);
     }
   }
 
@@ -76,7 +80,7 @@ class App {
   }
 
   handleSubmit() {
-    this.send(message);
+    App.pointer.send(message);
   }
 
   clearRooms() {
@@ -87,11 +91,11 @@ class App {
 const app = new App();
 app.init();
 
-var message = {
-  username: 'titan',
-  text: 'trololo',
-  roomname: '4chan'
-};
+// var message = {
+//   username: 'titan',
+//   text: 'trololo',
+//   roomname: '4chan'
+// };
 
 $(document).ready(function() {
   //console.log(app.data);
