@@ -41,6 +41,7 @@ class App {
     
       success: function (data) {
         App.pointer.clearMessages();
+        App.pointer.clearRooms();
         for (var i = 0; i < data.results.length; i++) {
           App.pointer.renderMessage(data.results[i]);
           App.rooms[data.results[i].roomname] = data.results[i].roomname;
@@ -78,8 +79,8 @@ class App {
     this.send(message);
   }
 
-  renderAllMessages() {
-    
+  clearRooms() {
+    $('.roomsDrop').empty();
   } 
 };
 
